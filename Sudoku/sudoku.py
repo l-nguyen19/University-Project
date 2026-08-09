@@ -1,17 +1,18 @@
-# Name:             Hoang Long Nguyen
-# Matrikelnummer:   808101
+# Libraries
 
-# Bibliotheken
 import pygame
 import random
 
-# startet pygame
+# Initialize pygame
+
 pygame.init()
 
-# damit das Programm/pygame laeuft
+# Keeps the program/pygame running
+
 run = True
 
-# Farben
+# Colors
+
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLACK = (0, 0, 0)
@@ -19,10 +20,12 @@ WHITE = (255, 255, 255)
 BLUE = (0, 0, 128)
 GREY = (192, 192, 192)
 
-# um die Zahlen mittig in den Feldern zu platzieren
+# Used to center the numbers inside the cells / Offset
+
 extra = 5
 
-# Fenstereinstellungen
+# Window settings
+
 window = pygame.display.set_mode((550, 600))
 pygame.display.set_caption("Sudoku")
 window.fill(WHITE)
@@ -66,8 +69,9 @@ grid = [
 # ]
 
 
-# Funktion sucht nach leeren Felder im Sudoku
-# grid: Sudokufeld in dem gesucht werden soll
+# Function that searches for an empty cell in the Sudoku
+# grid: Sudoku grid in which the search is performed
+
 def findEmpty(grid):
     for row in range(len(grid)):
         for col in range(len(grid[0])):
@@ -78,18 +82,19 @@ def findEmpty(grid):
 
 
 
-# Funktion printet ein Sudoku ins Terminal
-# grid: Sudokufeld das geprinted werden soll
+# Function that prints a Sudoku to the terminal
+# grid: Sudoku grid that should be printed
+
 def printGrid(grid):
     for i in range(len(grid)):
-        # trennt Bloecke
+        # Separates the blocks
         if i % 3 == 0 and i != 0:
             print("                      ")
         for j in range(len(grid[0])):
-            # trennt Bloecke
+            # Separates the blocks
             if j % 3 == 0 and j != 0:
                 print("   ", end="")
-            # ueberprueft, ob das Ende einer Reihe erreicht ist
+            # Checks whether the end of a row has been reached
             if j == 8:
                 print(grid[i][j])
             else:
@@ -97,28 +102,29 @@ def printGrid(grid):
 
 
 
-# Funktion zaehlt mithilfe von Backtracking alle moegliche Loesungen
-# grid: Sudokufeld das untersucht wird
+# Function that counts all possible solutions using backtracking
+# grid: Sudoku grid that is being examined
+
 def countSolutions(grid):
-    # versucht eine leeres Feld zu finden
+    # Try to find an empty cell
     cell = findEmpty(grid)
     if not cell:
-        # vollstaendige Loesung gefunden 
+        # Complete solution found
         return 1
 
     row, col = cell
     count = 0
 
-    # versucht Zahlen von 1 bis 9
+    # Try numbers from 1 to 9
     for i in range(1, 10):
-        # ueberprueft, ob die Zahl gueltig ist
+        # Check whether the number is valid
         if validNumber(grid, i, (row, col)):
             grid[row][col] = i
 
-            # Rekursiv weiter loesen und alle Loesungen zählen
+            # Recursively continue solving and count all solutions
             count += countSolutions(grid)
 
-            # Feld wird zuruekgesetzt falls Sackgasse
+            # Reset the cell if this path leads to a dead end
             grid[row][col] = 0
             
     return count
@@ -127,25 +133,26 @@ def countSolutions(grid):
 
 
 
-# Funktio ueberprueft, ob eine gegebene Zahl gueltig ist
-# grid: Sudokufeld in der die Zahl geprueft wird
-# number: die Zahl die geprueft wird
-# postion: Postion der Zahl im Sudokufeld
+# Function that checks whether a given number is valid
+# grid: Sudoku grid in which the number is checked
+# number: number that is being checked
+# position: position of the number in the Sudoku grid
+
 def validNumber(grid, number, position):
-    # ueberprueft, ob Wert gueltig ist
+    # Check whether the value is valid
     if 0 < number < 10:
         
-        # ueberprueft Spalte
+        # Check the column
         for y in range(len(grid)):
             if number == grid[y][position[1]] and position[0] != y:
                 return False
 
-        # ueberprueft Reihe
+        # Check the row
         for x in range(len(grid[0])):
             if number == grid[position[0]][x] and position[1] != x:
                 return False
 
-        # ueberprueft 3x3 Bloecke
+        # Check the 3x3 blocks
         xblock = position[1] // 3
         yblock = position[0] // 3
 
@@ -160,19 +167,20 @@ def validNumber(grid, number, position):
 
 
 
-# Funktion fuellt ein gegebenes Sudoku mit Zahlen
-# grid: Sudoku
+# Function that fills a given Sudoku with numbers
+# grid: Sudoku grid
+
 def completeGrid(grid):
-    # versucht eine leeres Feld zu finden
+    # Try to find an empty cell
     cell = findEmpty(grid)
     if cell is None: 
-        # Sudoku vollstaendig gefuellt 
+        # Sudoku completely filled
         return True
     else:
         row, col = cell
         
-    # generiere eine zufaellige Zahl und falls sie gueltig ist, gehe zum naechsten Feld
-    # falls sie nicht gueltig ist, generiere eine neue Zahl und probiere es nochmal
+    # Generate a random number and, if it is valid, move on to the next cell
+    # If it is not valid, generate a new number and try again
     # => Backtracking
     for number in range(1, 10):
         randomNumber = random.randint(1, 9)
@@ -185,35 +193,39 @@ def completeGrid(grid):
 
 
 
-# Funktion die die eingebenen Zahlen vom Spieler registriert und einfuegt
-# window: Fenster/Ansicht die bearbeitet werden soll
-# postion: Position des Feldes, wo die Zahl eingefuegt werden soll
+# Function that registers and inserts numbers entered by the player
+# window: window/view that is being modified
+# position: position of the cell where the number should be inserted
+
 def insertNumber(window, position):
     i, j = position[1], position[0]
     
-    # Programm zum interagieren mit dem Spieler, falls er ins Sudokufeld klickt
+    # Program for player interaction after clicking on the Sudoku field
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
             
-            # registriert einen Tastendruck
+            # Register a key press
             if event.type == pygame.KEYDOWN:
-                # ueberprueft, ob das Feld leer war, also ob das Feld zu Beginn schon belegt war und nicht veraendert werden kann
+                # Check whether the cell was originally empty,
+                # meaning that it was already filled and cannot be changed
                 if (original_grid[i-1][j-1] != 0):
                     return
                 
-                # ueberprueft, ob die 0-Taste gedrueckt wurde
+                # Check whether the 0 key was pressed
                 if (event.key == 48):
-                    # setzt in der 9x9 Matrix die Stelle auf 0 und erzeugt ein Rechteck im Sudokufeld, dass die vorherige Zahl ueberdeckt/loescht
+                    # Set the position in the 9x9 matrix to 0
+                    # and create a rectangle that covers/deletes the previous number
                     grid[i-1][j-1] = event.key - 48
                     pygame.draw.rect(window, WHITE, (position[0]*50 + extra, position[1]*50 + extra, 50 - 2*extra, 50 - 2*extra))
                     pygame.display.update()
                     return
                 
-                # ueberprueft, ob die Taste 1 bis 9 war
+                # Check whether the key was between 1 and 9
                 if (0 < event.key - 48 < 10): 
-                    # ueberdeckt die vorherige Zahl mit einem Rechteck und schreibt die neue Zahl darauf und setzt den Wert in der 9x9 Matrix
+                    # Cover the previous number with a rectangle,
+                    # write the new number on top and update the 9x9 matrix
                     pygame.draw.rect(window, WHITE, (position[0]*50 + extra, position[1]*50 + extra, 50 - 2*extra, 50 - 2*extra))
                     value = font.render(str(event.key-48), True, BLUE)
                     window.blit(value, (position[0]*50 + 15, position[1]*50))
@@ -225,8 +237,9 @@ def insertNumber(window, position):
 
 
 
-# Funktion ueberprueft das Ergebnis vom Spieler
-# grid: Sudokufeld, dass ueberprueft werden soll
+# Function that checks the player's result
+# grid: Sudoku grid that should be checked
+
 def checkResult(grid):
     for row in range(len(grid)):
         for col in range(len(grid[0])):
@@ -237,10 +250,12 @@ def checkResult(grid):
 
 
 
-# Funktion zeichnet das Sudokufeld
+# Function that draws the Sudoku grid
+
 def drawGrid():
     for i in range(0, 10):
-        # falls die Linie der Aussenrand oder eines 3x3 Blocks ist, wird sie dicker gezeichnet
+        # If the line is an outer border or separates a 3x3 block,
+        # it is drawn thicker
         if (i % 3 == 0):
             pygame.draw.line(window, BLACK, (50 + 50*i, 50), (50 + 50*i, 500), 4)
             pygame.draw.line(window, BLACK, (50, 50 + 50*i), (500, 50 + 50*i), 4)
@@ -251,8 +266,9 @@ def drawGrid():
 
 
 
-# Funktion zeichnet das Sudokufeld und fuegt die vorgegebenen Zahlen ein
-# grid: Sudokufeld das gezeichent werden soll
+# Function that draws the Sudoku grid and adds the given numbers
+# grid: Sudoku grid that should be displayed
+
 def updateGrid(grid):
     drawGrid()
     for i in range(0, len(grid[0])):
@@ -265,10 +281,12 @@ def updateGrid(grid):
 
 
 
-# Funktion die zum interagieren mit dem Spieler dient(Hauptprogramm nach dem auswaehlen der Schwierigkeit)
-# window: Fenster in der interagiert wird
+# Function that handles player interaction
+# Main program after selecting the difficulty
+# window: window in which the player interacts
+
 def playSudoku(window):
-    # zeichnet den check-Button und das Sudokufeld
+    # Draw the check button and the Sudoku grid
     window.fill(WHITE)
     check_button = pygame.Surface((140, 40))
     check_text = font.render("check", True, BLACK)
@@ -277,54 +295,56 @@ def playSudoku(window):
     window.blit(check_button, (55, 530))
     updateGrid(original_grid)
     
-    # Spielerintraktion
+    # Player interaction
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
             
-            # registriert Mausklick
+            # Register mouse click
             if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
                 pos = pygame.mouse.get_pos()
                 
-                # falls auf check-Button, ueberpruefe die Loesung des Spielers und gebe eine passende Ausgabe aus
+                # If the check button was clicked,
+                # check the player's solution and display an appropriate message
                 if (55 <= pos[0] <= 195 and 530 <= pos[1] <= 570):
                     if checkResult(grid):
-                        # print("korrekt")
+                        # print("correct")
                         pygame.draw.rect(window, WHITE, (300, 530, 200, 50))
                         correct_text = font.render("correct", True, GREEN)
                         window.blit(correct_text, (300, 520))
                         pygame.display.update()
                     else:
-                        # print("nicht korrekt")
+                        # print("incorrect")
                         pygame.draw.rect(window, WHITE, (300, 530, 200, 50))
                         correct_text = font.render("incorrect", True, RED)
                         window.blit(correct_text, (300, 520))
                         pygame.display.update()
-                # falls auf Sudokufeld, fuehre insertNumber() aus
+                # If the Sudoku grid was clicked, execute insertNumber()
                 if (50 <= pos[0] <= 500 and 50 <= pos[1] <= 500):
                     insertNumber(window, (pos[0]//50, pos[1]//50))
     #return
 
 
 
-# Funktion entfernt Zahlen aus dem Sudokufeld
-# grid: gegebenes Sudokufeld
-# num_to_remove: Anzahl der Zahlen die entfernt sollen
+# Function that removes numbers from the Sudoku grid
+# grid: given Sudoku grid
+# num_to_remove: number of numbers that should be removed
+
 def deleteNumbers(grid, num_to_remove):
     while num_to_remove > 0:
-        # waehle eine zufaelliges Feld aus
+        # Choose a random cell
         row, col = random.randint(0, 8), random.randint(0, 8)
         
-        # wenn das Feld nicht leer ist, speichere den original Wert fuer spaeter, falls mehrere Loesungen
-        # loesche die Zahl
+        # If the cell is not empty, save the original value for later
+        # in case there are multiple solutions, and remove the number
         if grid[row][col] != 0:
             original_value = grid[row][col]
             grid[row][col] = 0
 
-            # ueberpruefe, ob das Sudoku immer noch genau eine Loesung hat
+            # Check whether the Sudoku still has exactly one solution
             if countSolutions(grid) != 1:
-                # setze die ursprüngliche Zelle zurueck, falls keine eindeutige Liesung
+                # Restore the original cell if there is no unique solution
                 grid[row][col] = original_value
             else:
                 num_to_remove -= 1
@@ -332,11 +352,12 @@ def deleteNumbers(grid, num_to_remove):
 
 
 
-# Funktion zum generieren eines Sudokus mit Schwierigkeitsstufe
-# grid: Sudokufeld
-# num_to_remove: Anzahl der leeren Felder
+# Function that generates a Sudoku with a given difficulty level
+# grid: Sudoku grid
+# num_to_remove: number of empty cells
+
 def generateSudoku(grid, num_to_remove):
-    # erzeuge zuerst ein vollstaendiges Sudoku und entferne anschliessend Zahlen
+    # First create a complete Sudoku and then remove numbers
     completeGrid(grid)
     # printGrid(grid)
     deleteNumbers(grid, num_to_remove)
@@ -346,11 +367,13 @@ def generateSudoku(grid, num_to_remove):
 
 
 
-# Hauptmenue
-# Sudokufeld wird gezeichnet fuer das Hauptmenue
+# Main menu
+# Draw the Sudoku grid for the main menu
+
 drawGrid()
 
-# Buttons fuer Schwierigkeitsstufen
+# Buttons for difficulty levels
+
 easy_button = pygame.Surface((140, 40))
 easy_text = font.render("easy", True, BLACK)
 easy_button.fill(GREY)
@@ -369,11 +392,13 @@ hard_button.fill(GREY)
 hard_button.blit(hard_text, (31, -5))
 window.blit(hard_button, (355, 530))
 
-# updatet das Fenster
+# Update the window
+
 pygame.display.update()
 
 
-# Hauptprogramm
+# Main program
+
 while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -381,20 +406,23 @@ while run:
         if event.type == pygame.MOUSEBUTTONUP:
             pos = pygame.mouse.get_pos()
             
-            # falls auf easy-Button, erzeuge ein entsprechendes Sudokufeld, speichere das Ursprungssudoku und fuehre play_sudoku() aus zum spielen
+            # If the Easy button is clicked, generate a corresponding
+            # Sudoku, save the original grid and execute playSudoku() to play
             if (55 <= pos[0] <= 195 and 530 <= pos[1] <= 570):
                 newgrid = generateSudoku(grid, 30)
                 original_grid = [[newgrid[x][y] for y in range(len(newgrid[0]))] for x in range(len(newgrid))]
                 playSudoku(window)
                 
-            # falls auf medium-Button, erzeuge ein entsprechendes Sudokufeld, speichere das Ursprungssudoku und fuehre play_sudoku() aus zum spielen                
+            # If the Medium button is clicked, generate a corresponding
+            # Sudoku, save the original grid and execute playSudoku() to play
             if (205 <= pos[0] <= 345 and 530 <= pos[1] <= 570):
-                # print("Level medium")
+                # print("Medium level")
                 newgrid = generateSudoku(grid, 40)
                 original_grid = [[newgrid[x][y] for y in range(len(newgrid[0]))] for x in range(len(newgrid))]
                 playSudoku(window)
                 
-            # falls auf hard-Button, erzeuge ein entsprechendes Sudokufeld, speichere das Ursprungssudoku und fuehre play_sudoku() aus zum spielen                            
+            # If the Hard button is clicked, generate a corresponding
+            # Sudoku, save the original grid and execute playSudoku() to play
             if (355 <= pos[0] <= 495 and 530 <= pos[1] <= 570):
                 newgrid = generateSudoku(grid, 51)
                 original_grid = [[newgrid[x][y] for y in range(len(newgrid[0]))] for x in range(len(newgrid))]
