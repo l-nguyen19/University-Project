@@ -38,6 +38,4 @@ Schließen Sie einfach das Fenster, um das Programm zu beenden.
 - Bei "Hard" kann die Generierung durch die Eindeutigkeitsprüfung spürbar länger dauern.
 - Der Spielfortschritt wird nicht gespeichert.
 
------
 
-Bei Fragen und Anmerkungen wenden Sie sich gern an das Entwicklungsteam dieses Projekts.
