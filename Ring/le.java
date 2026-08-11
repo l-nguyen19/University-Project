@@ -1,4 +1,4 @@
-public class le<T{
+public class le<T>{
     //Datentypen
     private T value;
     protected le<T> next;   //links
