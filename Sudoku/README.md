@@ -21,8 +21,6 @@ Klicken Sie auf einen der drei Buttons, um ein neues Sudoku mit entsprechender A
 - **Medium**: 40 leere Felder
 - **Hard**: 51 leere Felder
 
-Die Generierung kann bei höherem Schwierigkeitsgrad einen Moment dauern, da im Hintergrund geprüft wird, dass das Rätsel eine eindeutige Lösung besitzt.
-
 ### Zahlen eintragen
 1. Klicken Sie mit der Maus auf eine leere Zelle im Raster.
 2. Geben Sie über die Tastatur eine Zahl zwischen 1 und 9 ein, um sie in die Zelle einzutragen.
@@ -35,7 +33,9 @@ Klicken Sie auf den Button **check** am unteren Rand des Fensters.
 
 ### Beenden
 Schließen Sie einfach das Fenster, um das Programm zu beenden.
+
+### Hinweise
 - Bei "Hard" kann die Generierung durch die Eindeutigkeitsprüfung spürbar länger dauern.
-- Der Spielfortschritt wird nicht gespeichert.
+
 
 
