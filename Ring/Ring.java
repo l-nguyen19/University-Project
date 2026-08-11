@@ -1,6 +1,3 @@
-//Vorname, Name: Hoang Long, Nguyen
-//Matrikel-Nr.: 808101
-
 import java.util.*;
 public class Ring<T>{
     
