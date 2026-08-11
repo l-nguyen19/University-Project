@@ -9,9 +9,6 @@ Die Liste besteht aus einzelnen Listenelementen (`listelement`), die jeweils ein
 Das Programm bietet verschiedene Funktionen zum **Einfügen, Ausgeben, Suchen, Löschen und Filtern** von Listenelementen und soll die grundlegende Verwendung einer **einfach verketteten Liste in C** demonstrieren.
 
 ## Verwendete Bibliotheken
-
-Das Programm verwendet:
-
 ```c
 #include <stdio.h>
 #include <stdlib.h>
