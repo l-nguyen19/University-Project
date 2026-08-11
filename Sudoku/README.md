@@ -1,6 +1,9 @@
 # Sudoku (Pygame)
 
 ## Allgemeine Information
+**Hinweise**
+- Bei "Hard" kann die Generierung durch die Eindeutigkeitsprüfung spürbar länger dauern.
+- Letzte Bearbeitung 14.03.2024
 
 Dieses Projekt ist ein Sudoku-Spiel mit grafischer Oberfläche, umgesetzt in Python mit der Bibliothek [pygame]. Das Programm generiert automatisch ein lösbares Sudoku mit eindeutiger Lösung (per Backtracking) und lässt Spielerinnen und Spieler es über Maus und Tastatur ausfüllen. Es stehen drei Schwierigkeitsgrade zur Verfügung: Easy, Medium und Hard.
 
@@ -34,8 +37,6 @@ Klicken Sie auf den Button **check** am unteren Rand des Fensters.
 ### Beenden
 Schließen Sie einfach das Fenster, um das Programm zu beenden.
 
-### Hinweise
-- Bei "Hard" kann die Generierung durch die Eindeutigkeitsprüfung spürbar länger dauern.
 
 
 
