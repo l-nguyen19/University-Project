@@ -2,6 +2,9 @@
 
 **Hinweis:** Letzte Bearbeitung 14.02.2023
 
+## Motivation
+Das Kanizsa-Dreieck ist eine visuelle Illusion aus der Gestaltpsychologie, bei der das menschliche Gehirn nicht vorhandene Bildinformationen ergänzt. Drei unvollständige Kreise und Liniensegmente erzeugen dabei die Wahrnehmung eines weißen Dreiecks, obwohl dessen Konturen tatsächlich nicht existieren. Das Gehirn verbindet die vorhandenen Eckpunkte und interpretiert die unvollständigen Elemente als zusammengehöriges, vollständiges Objekt. Das Projekt untersucht diese Illusion im Kontext der Bilderzeugung.
+
 ## Voraussetzungen
 
 Für die Nutzung wird **Jupyter Notebook** benötigt.
