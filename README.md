@@ -1,4 +1,4 @@
-# Uni-Projekte
+# Student Projects
 **Hinweise:**
 - Die Projekte dienen hauptsächlich zu Studien- und Lernzwecken. Der Funktionsumfang und die Dokumentation können je nach Projekt unterschiedlich ausfallen.
 
