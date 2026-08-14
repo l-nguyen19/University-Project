@@ -1,5 +1,7 @@
 # Kanizsa-Dreieck
 
+**Hinweis:** Letzte Bearbeitung 14.02.2023
+
 ## Voraussetzungen
 
 Für die Nutzung wird **Jupyter Notebook** benötigt.
