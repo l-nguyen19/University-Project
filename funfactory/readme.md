@@ -3,7 +3,7 @@
 **Hinweise**
 - Enthält noch einige Fehler, die behoben werden müssen.
 - Letzte Bearbeitung 08.01.2023
-- 
+
 Das Projekt ist ein Prototyp für eine Desktop-Anwendung eines Ticketsystems eines fiktiven Unternehmens "funfactory" für den Verkauf von Tickets und die Verwaltung von Veranstaltungen sowie der zugehörigen Kunden- und Mitarbeiterdaten.
 
 Die Anwendung ist als Java-Swing-GUI umgesetzt mit folgenden Funktionen:
