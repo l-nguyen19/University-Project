@@ -1,7 +1,7 @@
 # Projekt Funfactory (Ticketsystem)
 
 **Hinweise**
-- Kann noch einige contains errors that need to be fixed
+- Enthält noch einige Fehler, die behoben werden müssen.
 - Letzte Bearbeitung 08.01.2023
 - 
 Das Projekt ist ein Prototyp für eine Desktop-Anwendung eines Ticketsystems eines fiktiven Unternehmens "funfactory" für den Verkauf von Tickets und die Verwaltung von Veranstaltungen sowie der zugehörigen Kunden- und Mitarbeiterdaten.
