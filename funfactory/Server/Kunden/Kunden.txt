@@ -1,0 +1,4 @@
+ada@analyticalengine.uk/1012/Ada Lovelace/Joseph-Rovan-Allee 2, 53424 Remagen/515816/true/[null, null, null]
+zuse@zusekg.de/1812/Konrad Zuse/Takustraße 7, 14195 Berlin/961887/true/[null, Bezahldienstleister2:zuse@zusekg.de, null]
+alan@antienigma.com/2306/Alan Turing//127450/true/[Bezahldienstleister1:0100000101010100, null, Bezahldienstleister3:alant@coldmail.com]
+grace.hopper@navy.com/0101/Grace Hopper//528011/true/[null, null, null]
