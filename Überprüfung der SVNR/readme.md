@@ -3,5 +3,5 @@
 **Hinweis:** Letzte Bearbeitung 21.09.2026
 
 
-Überprüft die Gültigkeit der [Prüfziffer]([https://potassco.org](https://de.wikipedia.org/wiki/Sozialversicherungsnummer#Berechnung)) der Sozialversicherungsnummer (SVNR).
+Überprüft die Gültigkeit der [Prüfziffer](https://de.wikipedia.org/wiki/Sozialversicherungsnummer#Berechnung) der Sozialversicherungsnummer (SVNR).
 
