@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Sozialversicherungsnummer</h1>
+
+<form id="svnrForm">
+  <label for="pnr">Geben Sie Ihre 10-stellige Sozialversicherungsnummer ein:</label><br>
+  <input type="text" id="pnr" name="pnr" placeholder="0123456789"><br>
+  <input type="submit" value="Prüfen">
+</form>
+
+<p id="result"></p>
+
+<script>
+document.getElementById("svnrForm").addEventListener("submit", function(e) {
+  e.preventDefault(); 
+
+  const numInput = document.getElementById("pnr").value;
+  const result = document.getElementById("result");
+
+  if (numInput.length !== 10) {
+    result.textContent = "Bitte genau 10 Nummern eingeben.";
+    return;
+  }
+
+  const digits = numInput.split("").map(Number);
+  const WEIGHTS = [3, 7, 9, 0, 5, 8, 4, 2, 1, 6]; // Position 4 (Prüfziffer) wird übersprungen
+
+  let sum = 0;
+  for (let i = 0; i < 10; i++) {
+    if (i === 3) continue;
+    sum += digits[i] * WEIGHTS[i];
+  }
+
+  const verifNum = sum % 11;
+  const regisNum = digits[3];
+
+  if (verifNum === regisNum && verifNum !== 10) {
+    result.textContent = "Gültig!";
+  } else {
+    result.textContent = "Ungültig!";
+  }
+});
+</script>
+
+</body>
+</html>
